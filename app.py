@@ -20,9 +20,9 @@ fsu = st.number_input("焊钉极限抗拉强度 fsu (MPa)", min_value=200.0, max
 fsy = st.number_input("焊钉屈服强度 fsy (MPa)", min_value=200.0, max_value=700.0, step=100.0)
 
 if model_type == "群钉模型":
-    lz = st.number_input("纵向间距 lz (mm)", min_value=40.0, max_value=300.0, step=1.0)
-    nz = st.number_input("焊钉层数 nz", min_value=2, max_value=10, step=1)
-    lh = st.number_input("横向间距 lh (mm)", min_value=40.0, max_value=300.0, step=1.0)
+    lz = st.number_input("纵向间距 lz (mm)", min_value=0.0, max_value=300.0, step=1.0)
+    nz = st.number_input("焊钉层数 nz", min_value=0, max_value=10, step=1)
+    lh = st.number_input("横向间距 lh (mm)", min_value=0.0, max_value=300.0, step=1.0)
 else:
     lz, lh, nz = None, None, None
 
