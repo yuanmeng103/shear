@@ -74,13 +74,13 @@ html, body, [class*="css"] {
 
 /* 平台说明文字 */
 .stMarkdown div[style*="line-height"] {
-    font-size: 22px !important;
+    font-size: 24px !important;
 }
 
 /* ---- 输入框区域 ---- */
 input, select, textarea, label, div, span {
     font-family: 'Times New Roman', 'SimSun', serif !important;
-    font-size: 22px !important;
+    font-size: 24px !important;
 }
 
 /* 参数说明与输入框间距 */
@@ -145,7 +145,7 @@ st.markdown(f"""
     align-items: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 ">
-    <div style="flex: 1; font-size: 22px; line-height: 1.8; text-align: justify; color: #333;">
+    <div style="flex: 1; font-size: 24px; line-height: 1.8; text-align: justify; color: #333;">
         本平台基于机器学习算法（XGBoost），结合大量焊钉推出试验数据开发，
         能够快速预测单钉与群钉连接件的抗剪承载力。
         用户只需输入几何与材料参数，即可获得预测结果。
