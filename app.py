@@ -56,16 +56,20 @@ def set_background(image_name):
 # ---------------- 调用背景图 ----------------
 set_background("1.jpg")  # 这里写你的图片名
 
-def load_xgb_model(model_path):
+def load_model(model_filename):
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(base_dir, model_filename)
+    
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"{model_path} 不存在")
-    model = xgb.Booster()
+    
+    model = xgb.XGBRegressor()
     model.load_model(model_path)
     return model
 
-# 加载单钉与群钉模型
-single_model = load_xgb_model(r"E:\shear\single_model.json")
-group_model  = load_xgb_model(r"E:\shear\group_model.json")
+# —— 调用函数 —— 
+single_model = load_model("single_model.json")
+group_model = load_model("group_model.json")
 
 # 全局样式：统一字体、大小、加粗，并缩小参数说明与输入框的间距
 st.markdown("""
