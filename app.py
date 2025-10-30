@@ -1,5 +1,6 @@
 import streamlit as st      
 import joblib
+import xgboost as xgb
 import numpy as np
 import base64
 import os
@@ -55,9 +56,16 @@ def set_background(image_name):
 # ---------------- 调用背景图 ----------------
 set_background("1.jpg")  # 这里写你的图片名
 
-# 加载模型
-single_model = joblib.load("single_model.pkl")
-group_model = joblib.load("group_model.pkl")
+def load_xgb_model(model_path):
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"{model_path} 不存在")
+    model = xgb.Booster()
+    model.load_model(model_path)
+    return model
+
+# 加载单钉与群钉模型
+single_model = load_xgb_model(r"E:\shear\single_model.json")
+group_model  = load_xgb_model(r"E:\shear\group_model.json")
 
 # 全局样式：统一字体、大小、加粗，并缩小参数说明与输入框的间距
 st.markdown("""
@@ -74,13 +82,13 @@ html, body, [class*="css"] {
 
 /* 平台说明文字 */
 .stMarkdown div[style*="line-height"] {
-    font-size: 22px !important;
+    font-size: 24px !important;
 }
 
 /* ---- 输入框区域 ---- */
 input, select, textarea, label, div, span {
     font-family: 'Times New Roman', 'SimSun', serif !important;
-    font-size: 22px !important;
+    font-size: 24px !important;
 }
 
 /* 参数说明与输入框间距 */
@@ -126,7 +134,7 @@ div[data-testid="stSuccess"] div[data-testid="stMarkdownContainer"] {
 """, unsafe_allow_html=True)
 
 # 平台标题
-st.title("焊钉连接件抗剪承载力计算平台")
+st.title("焊钉连接件抗剪承载力计算平台(SCCPWS)")
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(current_dir, "2.png")
@@ -145,9 +153,10 @@ st.markdown(f"""
     align-items: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 ">
-    <div style="flex: 1; font-size: 22px; line-height: 1.8; text-align: justify; color: #333;">
-        本平台基于机器学习算法（XGBoost），结合大量焊钉推出试验数据开发，
-        能够快速预测单钉与群钉连接件的抗剪承载力。
+    <div style="flex: 1; font-size: 24px; line-height: 1.8; text-align: justify; color: #333;">
+        基于机器学习算法（XGBoost），结合639个单钉推出试验和193个群钉推出试验的数据库，
+        部署为在线计算平台，
+        该平台能够快速预测单钉与群钉连接件的抗剪承载力。
         用户只需输入几何与材料参数，即可获得预测结果。
     </div>
     <div style="flex: 0 0 260px; margin-left: 40px;">
