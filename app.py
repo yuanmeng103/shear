@@ -211,7 +211,7 @@ if model_type == "群钉模型":
     st.markdown('<p style="font-size:26px;">横向间距 <i>l</i><sub>h</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
     lh = st.number_input("lh", min_value=0.0, max_value=400.0, step=1.0, key="lh", label_visibility="collapsed")
 
-    st.markdown('<p style="font-size:26px;">焊钉列数 <i>n</i><sub>z</sub> </p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:26px;">焊钉列数 <i>n</i><sub>h</sub> </p>', unsafe_allow_html=True)
     nh = st.number_input("nh", min_value=0.0, max_value=30.0, step=1.0, key="nh", label_visibility="collapsed")
 else:
     lz, nz, lh, nh = None, None, None, None
