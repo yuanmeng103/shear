@@ -138,7 +138,7 @@ div[data-testid="stSuccess"] div[data-testid="stMarkdownContainer"] {
 """, unsafe_allow_html=True)
 
 # 平台标题
-st.title("焊钉连接件抗剪承载力计算平台(SCCPWS)")
+st.title("焊钉连接件抗剪承载力预测平台 Prediction Platform for the Shear Bearing Capacity of Stud Connectors")
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(current_dir, "2.png")
@@ -183,7 +183,7 @@ st.markdown("#### 输入参数")
 
 # 单钉参数
 st.markdown('<p style="font-size:26px;">焊钉直径 <i>d</i> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-d = st.number_input("d", min_value=0.0, max_value=30.0, step=0.1, label_visibility="collapsed")
+d = st.number_input("d", min_value=0.0, max_value=40.0, step=0.1, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">焊钉高度 <i>h</i> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
 h = st.number_input("h", min_value=50.0, max_value=500.0, step=0.1, label_visibility="collapsed")
@@ -203,15 +203,18 @@ fsu = st.number_input("fsu", min_value=200.0, max_value=600.0, step=10.0, key="f
 # 群钉特有参数
 if model_type == "群钉模型":
     st.markdown('<p style="font-size:26px;">纵向间距 <i>l</i><sub>z</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-    lz = st.number_input("lz", min_value=0.0, max_value=300.0, step=1.0, key="lz", label_visibility="collapsed")
+    lz = st.number_input("lz", min_value=0.0, max_value=400.0, step=1.0, key="lz", label_visibility="collapsed")
     
     st.markdown('<p style="font-size:26px;">焊钉层数 <i>n</i><sub>z</sub> </p>', unsafe_allow_html=True)
-    nz = st.number_input("nz", min_value=0.0, max_value=10.0, step=1.0, key="nz", label_visibility="collapsed")
+    nz = st.number_input("nz", min_value=0.0, max_value=30.0, step=1.0, key="nz", label_visibility="collapsed")
     
     st.markdown('<p style="font-size:26px;">横向间距 <i>l</i><sub>h</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-    lh = st.number_input("lh", min_value=0.0, max_value=300.0, step=1.0, key="lh", label_visibility="collapsed")
+    lh = st.number_input("lh", min_value=0.0, max_value=400.0, step=1.0, key="lh", label_visibility="collapsed")
+
+    st.markdown('<p style="font-size:26px;">焊钉列数 <i>n</i><sub>z</sub> </p>', unsafe_allow_html=True)
+    nh = st.number_input("nh", min_value=0.0, max_value=30.0, step=1.0, key="nz", label_visibility="collapsed")
 else:
-    lz, lh, nz = None, None, None
+    lz, nz, lh, nh = None, None, None, None
 
 # 计算按钮
 if st.button("计算抗剪承载力"):
@@ -219,6 +222,6 @@ if st.button("计算抗剪承载力"):
         X = np.array([[d, h, Ec, fcu, fsy, fsu]])
         y_pred = single_model.predict(X)[0]
     else:
-        X = np.array([[d, h, lz, nz, lh, Ec, fcu, fsy, fsu]])
+        X = np.array([[d, h, lz, nz, lh, nh, Ec, fcu, fsy, fsu]])
         y_pred = group_model.predict(X)[0]
     st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
