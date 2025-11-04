@@ -192,7 +192,7 @@ st.markdown('<p style="font-size:26px;">混凝土弹性模量 <i>E</i><sub>c</su
 Ec = st.number_input("Ec", min_value=20.0, max_value=60.0, step=1.0, key="Ec", label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">混凝土立方体抗压强度 <i>f</i><sub>cu</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
-fcu = st.number_input("fcu", min_value=20.0, max_value=70.0, step=1.0, key="fcu", label_visibility="collapsed")
+fcu = st.number_input("fcu", min_value=20.0, max_value=80.0, step=1.0, key="fcu", label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">焊钉钢材的屈服强度 <i>f</i><sub>sy</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
 fsy = st.number_input("fsy", min_value=200.0, max_value=700.0, step=10.0, key="fsy", label_visibility="collapsed")
@@ -212,7 +212,7 @@ if model_type == "群钉模型":
     lh = st.number_input("lh", min_value=0.0, max_value=400.0, step=1.0, key="lh", label_visibility="collapsed")
 
     st.markdown('<p style="font-size:26px;">焊钉列数 <i>n</i><sub>z</sub> </p>', unsafe_allow_html=True)
-    nh = st.number_input("nh", min_value=0.0, max_value=30.0, step=1.0, key="nz", label_visibility="collapsed")
+    nh = st.number_input("nh", min_value=0.0, max_value=30.0, step=1.0, key="nh", label_visibility="collapsed")
 else:
     lz, nz, lh, nh = None, None, None, None
 
